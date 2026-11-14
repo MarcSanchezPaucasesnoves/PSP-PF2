@@ -11,6 +11,7 @@ public class CintaTransportadora {
     private final Queue<String> buffer;
     private final Condition cintaNoPlena;
     private final Condition cintaNoBuida;
+    private int totalBateriesFabricades = 0;
 
     public CintaTransportadora(int capacitatMaxima) {
         lock = new ReentrantLock();
@@ -30,6 +31,7 @@ public class CintaTransportadora {
 
             String bateria = "BateriaAVG" + idAgv + "N" + comptador;
             buffer.offer(bateria);
+            totalBateriesFabricades++;
             cintaNoBuida.signal();
 
         } finally {
@@ -52,5 +54,10 @@ public class CintaTransportadora {
         } finally {
             lock.unlock();
         }
+    }
+
+    
+    public synchronized int getTotalBateriesFabricades() {
+        return totalBateriesFabricades;
     }
 }

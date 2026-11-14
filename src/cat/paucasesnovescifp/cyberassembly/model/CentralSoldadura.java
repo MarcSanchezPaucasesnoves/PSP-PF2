@@ -8,6 +8,9 @@ public class CentralSoldadura {
     private boolean[] estacionsOcupades;
     private boolean[] estacionsAvariades;
     private int nombreEstacions;
+    private final String[] bateriesEnProces;
+    private int totalSoldadures = 0;
+    private int totalAvaries = 0;
 
 
     public CentralSoldadura(int nombreEstacions) {
@@ -16,6 +19,7 @@ public class CentralSoldadura {
         semaforRegistreCentral = new Semaphore(1, true);
         estacionsOcupades = new boolean[nombreEstacions];
         estacionsAvariades = new boolean[nombreEstacions];
+        bateriesEnProces = new String[nombreEstacions];
     }
 
     public int agafarEstacio(int idRobot) throws InterruptedException {
@@ -43,8 +47,10 @@ public class CentralSoldadura {
         
         synchronized (this) {
             estacionsOcupades[estacio] = false;
+            bateriesEnProces[estacio] = null;
         }
 
+        totalSoldadures++;
         semaforEstacions.release();
     }
 
@@ -65,6 +71,7 @@ public class CentralSoldadura {
         
         synchronized (this) {
             estacionsAvariades[estacio] = true;
+            totalAvaries++;
         }
     }
 
@@ -85,4 +92,22 @@ public class CentralSoldadura {
         return estacionsAvariades.clone();
     }
 
+
+    public synchronized void assignarBateriaEstacio(int estacio, String bateria) {
+        bateriesEnProces[estacio] = bateria;
+    }
+
+    public synchronized String[] getBateriesEnProces() {
+        return bateriesEnProces.clone();
+    }
+
+
+
+    public synchronized int getTotalSoldadures() {
+        return totalSoldadures;
+    }
+
+    public synchronized int getTotalAvaries() {
+        return totalAvaries;
+    }
 }

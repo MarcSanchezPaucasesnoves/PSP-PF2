@@ -32,6 +32,8 @@ public class RobotTask implements Runnable{
 
                 int estacioAssignada = centralSoldadura.agafarEstacio(id);
 
+                centralSoldadura.assignarBateriaEstacio(estacioAssignada, bateria);
+
                 Thread.sleep(random.nextInt(2000) + 1000);
 
                 centralSoldadura.alliberarEstacio(id, estacioAssignada);
