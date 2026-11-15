@@ -60,4 +60,9 @@ public class CintaTransportadora {
     public synchronized int getTotalBateriesFabricades() {
         return totalBateriesFabricades;
     }
+
+
+    public synchronized int getQuantitatBateries() {
+        return buffer.size();
+    }
 }

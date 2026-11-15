@@ -21,6 +21,8 @@ public class DashboardTask implements Runnable{
         IO.println("====ESTAT CYBERASSEMBLY DASHBOARD====");
         IO.println("Alerta Superescalfament: " + (supervisorCentral.isAlertaActiva() ? "ACTIVA" : "INACTIVA") );
 
+        IO.println("Quantitat de bateries actuals a la cinta: " + cintaTransportadora.getQuantitatBateries());
+
         boolean[] estacionsOcupades = centralSoldadura.getEstacionsOcupades();
         boolean[] estacionsAvariades = centralSoldadura.getEstacionsAvariades();
         String[] bateries = centralSoldadura.getBateriesEnProces();
