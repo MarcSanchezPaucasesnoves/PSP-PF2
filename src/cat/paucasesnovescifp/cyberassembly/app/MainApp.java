@@ -41,6 +41,7 @@ public class MainApp {
         CintaTransportadora cintaTransportadora = new CintaTransportadora(capacitatCinta);
         CentralSoldadura centralSoldadura = new CentralSoldadura(nEstacions);
         SupervisorCentral supervisorCentral = new SupervisorCentral();
+        supervisorCentral.activarAlerta();
 
 
 
@@ -85,7 +86,9 @@ public class MainApp {
         IO.println();
 
         try {
-            Thread.sleep(20000);
+            Thread.sleep(10000);
+            supervisorCentral.desactivarAlerta();
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
